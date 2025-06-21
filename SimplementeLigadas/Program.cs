@@ -3,9 +3,23 @@
     internal class Program
     {
         static void Main(string[] args)
-        {
-            Nodo nodo1 = new Nodo();
-            nodo1.Valor = "Primer Nodo";
+        {           
+            Lista lista = new Lista();
+            lista.Agregar("A");
+            lista.Agregar("B");
+            lista.Agregar("C");
+            lista.Agregar("D");
+            lista.Agregar("E");
+            lista.Agregar("F");
+            lista.Agregar("G");
+
+            Console.WriteLine(lista.ObtenerValores());
+
+            lista.Eliminar("C");
+
+            Console.WriteLine();
+            Console.WriteLine(lista.ObtenerValores());
+
         }
     }
 }
