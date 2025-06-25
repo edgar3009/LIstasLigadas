@@ -22,6 +22,7 @@ namespace SimplementeLigadas
 
             Nodo nuevoNodo = new Nodo(dato);
             actual.Enlace = nuevoNodo;
+            nuevoNodo.Anterior = actual; 
         }
 
         public string ObtenerValores()
@@ -29,6 +30,7 @@ namespace SimplementeLigadas
             StringBuilder datos = new StringBuilder();
 
             Nodo actual = _inicial;
+
             while (actual.Enlace != null)
             {
                 actual = actual.Enlace;
@@ -55,7 +57,6 @@ namespace SimplementeLigadas
 
         private Nodo BuscarAnterior(string valor)
         {
-
             Nodo actual = _inicial;
             while (actual.Enlace != null)
             {
@@ -73,15 +74,20 @@ namespace SimplementeLigadas
             Nodo nodoActual = Buscar(valor);
             if (nodoActual is not null)
             {
-                Nodo nodoAnterior = BuscarAnterior(valor);
+                Nodo nodoAnterior = nodoActual.Anterior;
 
                 if (nodoAnterior is null)
                 {
                     throw new Exception("No se encontró el nodo anterior");
-                } 
+                }
 
                 nodoAnterior.Enlace = nodoActual.Enlace;
+                if (nodoActual.Enlace != null)
+                {
+                    nodoActual.Enlace.Anterior = nodoAnterior; 
+                }
                 nodoActual.Enlace = null;
+                nodoActual.Anterior = null;
             }
         }
     }
