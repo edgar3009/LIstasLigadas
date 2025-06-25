@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {           
+
             Lista lista = new Lista();
             lista.Agregar("A");
             lista.Agregar("B");

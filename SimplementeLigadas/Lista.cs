@@ -21,8 +21,9 @@ namespace SimplementeLigadas
             }
 
             Nodo nuevoNodo = new Nodo(dato);
+            nuevoNodo.Anterior = actual;
             actual.Enlace = nuevoNodo;
-        }
+            }
 
         public string ObtenerValores()
         {
@@ -53,35 +54,46 @@ namespace SimplementeLigadas
             return null;
         }
 
-        private Nodo BuscarAnterior(string valor)
-        {
+      /*  private Nodo BuscarAnterior(string valor)
+         {
 
-            Nodo actual = _inicial;
-            while (actual.Enlace != null)
-            {
-                if (actual.Enlace.Valor == valor)
-                {
-                    return actual;
-                }
-                actual = actual.Enlace;
-            }
-            return null;
-        }
+             Nodo actual = _inicial;
+             while (actual.Enlace != null)
+             {
+                 if (actual.Enlace.Valor == valor)
+                 {
+                     return actual;
+                 }
+                 actual = actual.Enlace;
+             }
+             return null;
+         }*/
+
+          // Ya no es necesario, porque ya cada nodo conoce su nodo anterior
+
 
         public void Eliminar(string valor)
         {
             Nodo nodoActual = Buscar(valor);
             if (nodoActual is not null)
             {
-                Nodo nodoAnterior = BuscarAnterior(valor);
+                Nodo nodoAnterior = nodoActual.Anterior;
 
                 if (nodoAnterior is null)
                 {
                     throw new Exception("No se encontró el nodo anterior");
                 } 
+                
+                nodoAnterior.Enlace = nodoActual.Enlace;
+
+                if (nodoActual.Enlace != null)
+                {
+                    nodoActual.Enlace.Anterior = nodoAnterior;
+                }
 
                 nodoAnterior.Enlace = nodoActual.Enlace;
                 nodoActual.Enlace = null;
+
             }
         }
     }
